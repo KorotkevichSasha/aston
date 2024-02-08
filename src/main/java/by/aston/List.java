@@ -9,7 +9,6 @@ public interface List<T> {
     //Task 1
 
     boolean add(int index,T t);
-    void resize();
     int size();
     boolean isEmpty();
     int indexOf(T t);

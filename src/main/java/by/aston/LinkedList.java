@@ -5,7 +5,6 @@ public class LinkedList<T> implements List<T>{
     private Node<T> tail=null;
     private int size=0;
     private static final int CAPACITY = 10;
-    private static double LOAD_FACTOR = 0.75;
 
 
     private static class Node<T> {
@@ -35,8 +34,6 @@ public class LinkedList<T> implements List<T>{
     }
     @Override
     public boolean add(T t) {
-        if ((double)size / CAPACITY >= LOAD_FACTOR)resize();
-
         Node<T> newNode = new Node<>(t);
         if (head == null) {
             return false;
@@ -80,8 +77,6 @@ public class LinkedList<T> implements List<T>{
 
     @Override
     public boolean addAll(List<? extends T> collection) {
-        if ((double)size / CAPACITY >= LOAD_FACTOR) resize();
-
         if (collection == null || collection.isEmpty()) return false;
 
         for (int i = 0; i < collection.size(); i++) {
@@ -96,25 +91,12 @@ public class LinkedList<T> implements List<T>{
         return size;
     }
 
-    @Override
-    public void resize() {
-        int newSize = (int) (size / LOAD_FACTOR);
-        Node<T>[] newArray = new Node[newSize];
 
-        Node<T> current = head;
-        int index = 0;
-        while (current != null) {
-            newArray[index] = current;
-            current = current.next;
-            index++;
-        }
-    }
+
 
     @Override
     public boolean add(int index, T t) {
         if (index < 0 || index > size) throw new IndexOutOfBoundsException();
-
-        if ((double)size / CAPACITY >= LOAD_FACTOR) resize();
 
         if (index == size) {
             add(t);
