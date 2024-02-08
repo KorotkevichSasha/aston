@@ -10,6 +10,7 @@ public interface List<T> {
 
     boolean add(int index,T t);
     void resize();
+    int size();
     boolean isEmpty();
     int indexOf(T t);
 }

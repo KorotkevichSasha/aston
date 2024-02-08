@@ -99,6 +99,12 @@ public class ArrayList<T> implements List<T>{
         }
         array = newArray;
     }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
     @Override
     public boolean isEmpty() {
         return size==0;
