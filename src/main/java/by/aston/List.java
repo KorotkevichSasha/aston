@@ -8,7 +8,7 @@ public interface List<T> {
     boolean addAll(List<? extends T> collection);
     //Task 1
 
-
+    boolean add(int index,T t);
     void resize();
     boolean isEmpty();
     int indexOf(T t);

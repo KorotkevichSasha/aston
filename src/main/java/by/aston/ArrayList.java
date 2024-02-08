@@ -5,7 +5,6 @@ import java.util.NoSuchElementException;
 public class ArrayList<T> implements List<T>{
     private int size =10;
     private T[] array;
-//    private static final int CAPACITY = 10;
     private double LOAD_FACTOR = 1.5D;
 
     public ArrayList(List<? extends T> collection) { //Task 2
@@ -26,7 +25,7 @@ public class ArrayList<T> implements List<T>{
     }
 
     public ArrayList() {
-            array = (T[]) new Object[10];
+        array = (T[]) new Object[10];
     }
 
     public ArrayList(int capacity, double loadFactor){
@@ -39,6 +38,17 @@ public class ArrayList<T> implements List<T>{
         if (t ==null)return false;
         if(array.length == size)resize();
         array[size++] =t;
+        return true;
+    }
+    public boolean add(int index, T t) {
+        if (t ==null)return false;
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
+        }
+        if(array.length == size)resize();
+        System.arraycopy(array, index, array, index + 1, size - index);
+        array[index] = t;
+        size++;
         return true;
     }
 
@@ -101,8 +111,6 @@ public class ArrayList<T> implements List<T>{
         return -1;
     }
 
-
-
     public ListIterator<T> iterator(){return new ArrayListIterator();}
     private class ArrayListIterator implements ListIterator<T>{
         private int currentlyIndex =-1;
@@ -116,5 +124,4 @@ public class ArrayList<T> implements List<T>{
             return array[++currentlyIndex];
         }
     }
-
 }
