@@ -1,12 +1,15 @@
 package by.aston;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class ArrayList<T> implements List<T>{
-    private int size =10;
+    private int size =0;
     private T[] array;
     private double LOAD_FACTOR = 1.5D;
+    private final static int CAPACITY =10;
 
+    @SuppressWarnings("unchecked")
     public ArrayList(List<? extends T> collection) { //Task 2
         int size = 0;
         while (true) {
@@ -17,17 +20,16 @@ public class ArrayList<T> implements List<T>{
                 break;
             }
         }
-
         this.size = size;
-        array = (T[]) new Object[this.size + 10];
-        if (size > array.length) resize();
+        //if (size > array.length) resize();
+        array = (T[]) new Object[size];
         for (int i = 0; i < size; i++) array[i] = collection.get(i);
     }
-
+    @SuppressWarnings("unchecked")
     public ArrayList() {
-        array = (T[]) new Object[10];
+        array = (T[]) new Object[CAPACITY];
     }
-
+    @SuppressWarnings("unchecked")
     public ArrayList(int capacity, double loadFactor){
         LOAD_FACTOR = loadFactor;
         array = (T[])new Object[capacity];
@@ -36,7 +38,7 @@ public class ArrayList<T> implements List<T>{
     @Override
     public boolean add(T t) {
         if (t ==null)return false;
-        if(array.length == size)resize();
+        if(size == array.length)resize();
         array[size++] =t;
         return true;
     }
@@ -89,7 +91,7 @@ public class ArrayList<T> implements List<T>{
     }
 
 
-
+    @SuppressWarnings("unchecked")
     public void resize(){
         int newSize = (int)(array.length * LOAD_FACTOR);
         T[] newArray = (T[]) new Object[newSize];
@@ -115,6 +117,11 @@ public class ArrayList<T> implements List<T>{
             if (array[i].equals(t))return  i; // не проверяем равенство с null, так как add не допускает null
         }
         return -1;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T[] toArray() {
+        return Arrays.copyOf(array, size);
     }
 
     public ListIterator<T> iterator(){return new ArrayListIterator();}
