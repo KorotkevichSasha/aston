@@ -1,12 +1,16 @@
 package by.aston;
 
+import java.util.Arrays;
+
 public class LinkedList<T> implements List<T>{
     private Node<T> head=null;
     private Node<T> tail=null;
     private int size=0;
     private static final int CAPACITY = 10;
 
+    public LinkedList() {
 
+    }
     private static class Node<T> {
         T data;
         Node<T> prev;
@@ -36,7 +40,8 @@ public class LinkedList<T> implements List<T>{
     public boolean add(T t) {
         Node<T> newNode = new Node<>(t);
         if (head == null) {
-            return false;
+            head = newNode;
+            tail = newNode;
         } else {
             tail.next = newNode;
             newNode.prev = tail;
@@ -46,6 +51,7 @@ public class LinkedList<T> implements List<T>{
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T get(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -55,7 +61,7 @@ public class LinkedList<T> implements List<T>{
         }
         return current.data;
     }
-
+    @SuppressWarnings("unchecked")
     @Override
     public T remove(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
@@ -64,15 +70,14 @@ public class LinkedList<T> implements List<T>{
             head = toRemove.next;
         } else {
             toRemove.prev.next = toRemove.next;
-            return (T)toRemove; //
         }
-
          if (toRemove == tail) {
             tail = toRemove.prev;
         } else {
             toRemove.next.prev = toRemove.prev;
         }
-        return (T)toRemove;
+         size--;
+        return toRemove.data;
     }
 
     @Override

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 class ArrayListTest {
+
     @Test
     public void testAddSingleElementAndGetSingleElement() {
         ArrayList<Integer> list = new ArrayList<>();
@@ -86,7 +87,7 @@ class ArrayListTest {
         assertEquals(2, (int)list.get(1));
     }
     @Test
-    void SortArrayList() {
+    void testSortArrayList() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(15);
         list.add(4);
@@ -103,7 +104,7 @@ class ArrayListTest {
 
 
     @Test
-    void resize() {
+    void testResize() {
         ArrayList<Integer> list = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             list.add(i);
@@ -118,7 +119,7 @@ class ArrayListTest {
 
 
     @Test
-    void isEmpty() {
+    void testIsEmpty() {
         ArrayList<Integer> list = new ArrayList<>();
         assertTrue(list.isEmpty());
         list.add(1);
@@ -126,7 +127,7 @@ class ArrayListTest {
     }
 
     @Test
-    void indexOf() {
+    void testIndexOfValue() {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(1);
         list.add(2);
@@ -135,5 +136,20 @@ class ArrayListTest {
         assertEquals(1, list.indexOf(2));
         assertEquals(2, list.indexOf(3));
         assertEquals(-1, list.indexOf(5));
+    }
+
+    @Test
+    public void testConstructorWithStringList() {
+        List<String> initList = new ArrayList<>();
+        initList.add("a");
+        initList.add("b");
+        initList.add("c");
+
+        LinkedList<String> linkedList = new LinkedList<>(initList);
+
+        assertEquals(initList.size(), linkedList.size());
+        for (int i = 0; i < initList.size(); i++) {
+            assertEquals(initList.get(i), linkedList.get(i));
+        }
     }
 }
