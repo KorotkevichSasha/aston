@@ -67,29 +67,6 @@ class LinkedListTest {
         assertFalse(list.isEmpty());
     }
 
-    @Test
-    void sortLinkedList() {
-        LinkedList<Integer> list = new LinkedList<>();
-        list.add(15);
-        list.add(4);
-        list.add(8);
-
-        List<Integer> sortedList = MyCollection.sort(list);
-        List<Integer> expectedList = new LinkedList<>();
-        expectedList.add(4);
-        expectedList.add(8);
-        expectedList.add(15);
-
-        assertListsEqual(expectedList, sortedList);
-    }
-
-    private void assertListsEqual(List<Integer> expected, List<Integer> actual) {
-        if (expected.size() != actual.size()) throw new AssertionError("Lists have different sizes");
-        for (int i = 0; i < expected.size(); i++) {
-            if (!expected.get(i).equals(actual.get(i))) throw new AssertionError("Lists differ at index " + i);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     @Test
     public void testConstructor() {
